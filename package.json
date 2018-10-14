@@ -1,6 +1,6 @@
 {
   "name": "get_picture",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "get pictures what you want.",
   "main": "src/index.js",
   "bin": {
@@ -18,6 +18,12 @@
   "bugs": {
     "url": "https://github.com/1eeing/get_picture/issues"
   },
+  "keywords": [
+    "puppeteer",
+    "commander",
+    "inquirer",
+    "getPictures"
+  ],
   "homepage": "https://github.com/1eeing/get_picture#readme",
   "dependencies": {
     "chalk": "^2.4.1",

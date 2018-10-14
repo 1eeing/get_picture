@@ -15,7 +15,7 @@ const urlToImg = promisify((url, dir) => {
         mod = https;
     }
     const ext = path.extname(url);
-    const file = path.join(dir, `${Date.now()}${ext}`);
+    const file = path.join(dir, `${parseInt(Math.random() * 1000000)}${ext}`);
 
     mod.get(url, res => {
         res.pipe(fs.createWriteStream(file)).on('finish', () => {
@@ -28,7 +28,7 @@ const base64ToImg = async (base64Str, dir) => {
     const matchs = base64Str.match(regMap.isBase64);
     try {
         const ext = matchs[1].split('/')[1].replace('jpeg', 'jpg');
-        const file = path.join(dir, `${Date.now()}.${ext}`);
+        const file = path.join(dir, `${parseInt(Math.random() * 1000000)}.${ext}`);
 
         await writeFile(file, matchs[2], 'base64');
         console.log(file);
