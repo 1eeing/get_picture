@@ -27,6 +27,11 @@ program
         const clean = new Clean();
         answers.isRemove && await clean.clean();
     });
+
+program
+    .command('*')
+    .description('not supposed commander.')
+    .action(() => program.help());
     
 program.parse(process.argv);
 
