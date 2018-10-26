@@ -4,5 +4,7 @@ module.exports = {
     searchPath: 'http://image.baidu.com/',
     outputPath: path.join(__dirname, '../../output'),
     presentPath: process.cwd(),
-    keyword: ''
+    keyword: '',
+    key: '',
+    imgMinPath: path.join(process.cwd(), './images')
 };
