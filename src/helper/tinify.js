@@ -52,7 +52,7 @@ function writeFilePromise(file, content, cb) {
 
 function toBufferPromise(sourceData) {
     return new Promise((resolve, reject) => {
-        tinify.fromBuffer(sourceData).toBuffer(function(err, resultData) {
+        tinify.fromBuffer(sourceData).toBuffer((err, resultData) => {
             if (err) {
                 return reject(err);
             }
