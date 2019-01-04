@@ -11,7 +11,7 @@ const { validate, leftCount, imgMin } = require('./helper/tinify');
 class ImgMin {
     constructor(conf) {
         this.conf = Object.assign({}, defaultConf, conf);
-        this.imgs = 0;
+        // this.imgs = 0;
     }
 
     async isDir(filePath) {
@@ -55,10 +55,10 @@ class ImgMin {
             this.findImg();
         }else if(stats.isFile()){
             if(regMap.isTinyPic.test(file)){
-                this.imgs ++;
+                // this.imgs ++;
                 const left = leftCount();
                 // 剩余数判断，解决同步时剩余数不足导致的全部图片压缩失败问题
-                if(this.imgs > left || left < 0){
+                if(left <= 0){
                     console.log(chalk.red(`当前key的可用剩余数不足！${file} 压缩失败！`));
                     return;
                 }

@@ -68,7 +68,7 @@ async function imgMin(img) {
         const resultData = await toBufferPromise(sourceData);
         await writeFilePromise(img, resultData, () => console.log(chalk.green(`图片压缩成功 ${img}`)));
     } catch (error) {
-        console.log(error);
+        console.log(chalk.red(`压缩图片 ${img} 失败： ${error}`));
     }
 };
 
