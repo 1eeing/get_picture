@@ -3,6 +3,7 @@ const tinify = require('tinify');
 const chalk = require('chalk');
 const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
+const { imgMinOutputPath } = require('../config/default');
 
 function setKey(key) {
     tinify.key = key;
@@ -39,8 +40,9 @@ function leftCount() {
 };
 
 function writeFilePromise(file, content, cb) {
+    const outputPath = path.join(imgMinOutputPath, file);
     return new Promise((resolve, reject) => {
-        fs.writeFile(file, content, (err) => {
+        fs.writeFile(outputPath, content, (err) => {
             if(err){
                 return reject(err);
             }
