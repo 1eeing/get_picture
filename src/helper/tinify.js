@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const tinify = require('tinify');
 const chalk = require('chalk');
 const { promisify } = require('util');
