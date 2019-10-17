@@ -12,7 +12,7 @@ npm install get_picture -g
 
     // 压缩图片说明
     gp p --help 查看帮助
-    gp p -k|--key [key] tinypng官网申请的key，必填
+    gp p -k|--key [key] tinypng官网申请的key，第一次必填，填写后会保存在本地。下次可以不填，从历史记录里选取。
     gp p -p|--path [path] 自定义检索路径，请填写绝对路径，默认取当前命令行目录下的/images路径
 ```
 
