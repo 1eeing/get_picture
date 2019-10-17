@@ -34,12 +34,6 @@ class ImgMin {
             }
             const files = await readdir(filePath);
             for(let file of files){
-                // 这里不能用forEach，只能用for循环
-                // 加上await，则是一张张异步压缩图片，如果中间出错，则部分成功
-                // 不加await，则是同步发起压缩图片请求，异步写入，如果中间出错，则全部失败
-                // 这里为了压缩更快，采用同步写法
-
-                // await this.getImg(file);
                 const fullPath = path.join(filePath, file);
                 this.getImg(fullPath);
             }
@@ -52,7 +46,7 @@ class ImgMin {
         const stats = await stat(file);
         // 如果是文件夹，则递归调用findImg
         if(stats.isDirectory()){
-            this.findImg();
+            this.findImg(file);
         }else if(stats.isFile()){
             if(regMap.isTinyPic.test(file)){
                 // this.imgs ++;
@@ -62,7 +56,7 @@ class ImgMin {
                     console.log(chalk.red(`当前key的可用剩余数不足！${file} 压缩失败！`));
                     return;
                 }
-                await imgMin(file);
+                await imgMin(file, this.conf);
             }else{
                 console.log(chalk.red(`不支持的文件格式 ${file}`));
             }

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const mkdirp = require('mkdirp');
 const tinify = require('tinify');
 const chalk = require('chalk');
 const { promisify } = require('util');
@@ -40,10 +41,22 @@ function leftCount() {
     return total - Number(compressionCount());
 };
 
-function writeFilePromise(file, content, cb) {
-    const outputPath = path.join(imgMinOutputPath, file);
+function mkdirOutput(file) {
+    const { dir } = path.parse(file);
     return new Promise((resolve, reject) => {
-        fs.writeFile(outputPath, content, (err) => {
+        mkdirp(dir, function (err) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(true);
+        })
+    })
+}
+
+function writeFilePromise(file, content, cb) {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(file, content, (err) => {
             if(err){
                 return reject(err);
             }
@@ -64,12 +77,16 @@ function toBufferPromise(sourceData) {
     });
 };
 
-async function imgMin(img) {
+async function imgMin(img, conf) {
     try {
         console.log(chalk.blue(`开始压缩图片 ${img}`));
         const sourceData = await readFile(img);
         const resultData = await toBufferPromise(sourceData);
-        await writeFilePromise(img, resultData, () => console.log(chalk.green(`图片压缩成功 ${img}`)));
+        // 获取图片和压缩目录之间的相对路径
+        const relativePath = path.relative(conf.imgMinPath, img);
+        const outputPath = path.resolve(imgMinOutputPath, relativePath);
+        await mkdirOutput(outputPath);
+        await writeFilePromise(outputPath, resultData, () => console.log(chalk.green(`图片压缩成功 ${img}`)));
     } catch (error) {
         console.log(chalk.red(`压缩图片 ${img} 失败： ${error}`));
     }

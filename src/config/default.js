@@ -10,5 +10,5 @@ module.exports = {
     // 图片压缩默认输入路径
     imgMinPath: path.join(process.cwd(), './images'),
     // 图片压缩输出目录
-    imgMinOutputPath: path.join(process.cwd(), './imgMinOutPut'),
+    imgMinOutputPath: path.join(process.cwd(), './imgMinOutput'),
 };
