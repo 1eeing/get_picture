@@ -17,7 +17,7 @@ npm install get_picture -g
 ```
 
 ## 常见问题
-- Q: gp s 没有权限导致报错 `EACCES: permission denied ……` ？
+- Q: 没有权限导致报错 `EACCES: permission denied ……` ？
   A：with sudo and try again.
 - Q: node版本过低导致报错？
   A: 请将node升级至7.6以上版本，以确保支持 `async/await`.

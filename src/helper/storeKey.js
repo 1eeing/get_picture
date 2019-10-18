@@ -12,7 +12,7 @@ module.exports = async function (key) {
   try {
     const oldContent = await readFile(keysPath, 'utf8');
     const emptyContent = await readFile(emptyKeysPath, 'utf8');
-    const newContent = oldContent === emptyContent ? oldContent.replace('[]', `[${key}]`) : oldContent.replace(']', `,${key}]`);
+    const newContent = oldContent === emptyContent ? oldContent.replace('[]', `['${key}']`) : oldContent.replace(']', `,'${key}']`);
     await writeFile(keysPath, newContent);
     console.log(chalk.green("Saving tinypng's success!"));
   } catch (error) {
